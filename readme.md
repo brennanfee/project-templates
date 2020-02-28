@@ -41,6 +41,7 @@ description.
   these days so this has files for a basic setup of that.
 - packer -> These are files and scripts I use in packer setups.
 - vagrant -> Skeleton files for a vagrant setup.
+- ansible -> Some base files useful in Ansible projects.
 
 ## License
 
