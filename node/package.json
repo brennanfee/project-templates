@@ -10,7 +10,7 @@
   "bugs": "https://github.com/brennanfee/project-name/issues",
   "main": "readme.md",
   "scripts": {
-    "format": "npx prettier --write **/*.{html,css,js,jsx,ts,scss,less,json,md,yml,yaml}"
+    "format": "npx prettier --write **/*.{html,css,js,jsx,ts,scss,less,json,md,yml,yaml,toml}"
   },
   "keywords": [],
   "dependencies": {},
