@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "bfee-some-vagrant-box"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = true
+  end
+
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = true
+  end
+
+#  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.provision "ansible", run: "always" do |ansible|
+    ansible.compatibility_mode = '2.0'
+    ansible.playbook = "../../ping.yml"
+  end
+  if ARGV.include? '--provision-with'
+    config.vm.provision "main", type: "ansible" do |ansible|
+      ansible.compatibility_mode = '2.0'
+      ansible.playbook = "../../main.yml"
+    end
+    config.vm.provision "ping", type: "ansible" do |ansible|
+      ansible.compatibility_mode = '2.0'
+      ansible.playbook = "../../ping.yml"
+      ansible.verbose = "vvvv"
+    end
+    config.vm.provision "facts", type: "ansible" do |ansible|
+      ansible.compatibility_mode = '2.0'
+      ansible.playbook = "../../facts.yml"
+    end
+    config.vm.provision "reboot", type: "ansible" do |ansible|
+      ansible.playbook = "../../reboot.yml"
+      ansible.config_file = "ansible.cfg"
+      ansible.ask_become_pass = true
+      ansible.compatibility_mode = "2.0"
+    end
+    config.vm.provision "update", type: "ansible" do |ansible|
+      ansible.playbook = "../../update.yml"
+      ansible.config_file = "ansible.cfg"
+      ansible.ask_become_pass = true
+      ansible.compatibility_mode = "2.0"
+    end
+    config.vm.provision "upgrade", type: "ansible" do |ansible|
+      ansible.playbook = "../../upgrade.yml"
+      ansible.config_file = "ansible.cfg"
+      ansible.ask_become_pass = true
+      ansible.compatibility_mode = "2.0"
+    end
+  end
+end
