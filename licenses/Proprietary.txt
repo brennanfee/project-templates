@@ -1,0 +1,2 @@
+Copyright © 2020 Brennan Fee <brennan@github.mailbots.org> (https://github.com/brennanfee)
+All rights reserved.
