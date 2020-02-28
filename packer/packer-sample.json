@@ -1,0 +1,77 @@
+{
+  "variables": {
+    "iso_version": "2020.02.01"
+  },
+  "builders": [
+    {
+      "name": "some-os-configuration",
+      "type": "virtualbox-iso",
+      "guest_os_type": "Linux_64",
+      "iso_url": "https://path.com/to/iso/{{ user `iso_version` }}/the.iso",
+      "iso_checksum_url": "https://path.com/to/iso/{{ user `iso_version` }}/shasums.txt",
+      "iso_checksum_type": "sha1",
+
+      "headless": "true",
+
+      "http_directory": "../bootstrap",
+
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "45m",
+
+      "boot_wait": "20s",
+
+      "shutdown_command": "sudo -S systemctl poweroff",
+      "post_shutdown_delay": "2m",
+
+      "hard_drive_interface": "sata",
+      "format": "ovf",
+      "disk_size": "122880",
+      "guest_additions_mode": "disable",
+
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--ostype", "Linux_64"],
+        ["modifyvm", "{{.Name}}", "--memory", "8192"],
+        ["modifyvm", "{{.Name}}", "--firmware", "efi"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"],
+        ["modifyvm", "{{.Name}}", "--pae", "on"],
+        ["modifyvm", "{{.Name}}", "--acpi", "on"],
+        ["modifyvm", "{{.Name}}", "--ioapic", "on"],
+        ["modifyvm", "{{.Name}}", "--hwvirtex", "on"],
+        ["modifyvm", "{{.Name}}", "--nestedpaging", "on"],
+        ["modifyvm", "{{.Name}}", "--nested-hw-virt", "on"],
+        ["modifyvm", "{{.Name}}", "--vram", "128"],
+        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vboxsvga"],
+        ["modifyvm", "{{.Name}}", "--accelerate3d", "off"],
+        ["modifyvm", "{{.Name}}", "--monitorcount", "1"],
+        ["modifyvm", "{{.Name}}", "--clipboard-mode", "bidirectional"],
+        ["modifyvm", "{{.Name}}", "--draganddrop", "bidirectional"],
+        ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"],
+        ["modifyvm", "{{.Name}}", "--mouse", "usb"],
+        ["modifyvm", "{{.Name}}", "--keyboard", "usb"],
+        ["modifyvm", "{{.Name}}", "--audiocontroller", "hda"],
+        ["modifyvm", "{{.Name}}", "--audioout", "on"],
+        ["modifyvm", "{{.Name}}", "--audioin", "on"],
+        ["modifyvm", "{{.Name}}", "--audio", "pulse"],
+        ["modifyvm", "{{.Name}}", "--usb", "on"],
+        ["modifyvm", "{{.Name}}", "--usbehci", "on"],
+        ["modifyvm", "{{.Name}}", "--usbxhci", "on"]
+      ],
+
+      "boot_command": ["<enter><wait10><wait10>", "./go-command"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": ["scripts/cleanup.sh", "scripts/minimize.sh"]
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "boxes/bfee-some-os-configuration.box",
+      "type": "vagrant"
+    }
+  ]
+}

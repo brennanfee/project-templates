@@ -39,6 +39,7 @@ description.
   as prettier.
 - python -> I use [Poetry](https://python-poetry.org/) on most of my Python projects
   these days so this has files for a basic setup of that.
+- packer -> These are files and scripts I use in packer setups.
 
 ## License
 
