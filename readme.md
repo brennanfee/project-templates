@@ -35,6 +35,8 @@ description.
   etc.
 - licenses -> These are copies of the licenses I use with modifications. Pick one and
   copy it into the project folder named `license`.
+- node -> These are, naturally, node-specific files. Mostly config for common tools such
+  as prettier.
 
 ## License
 

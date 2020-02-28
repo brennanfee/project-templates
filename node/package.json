@@ -1,0 +1,54 @@
+{
+  "name": "project-name",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Project description.",
+  "license": "MIT",
+  "repository": "github:brennanfee/project-name",
+  "author": "Brennan Fee <brennan@github.mailbots.org> (https://github.com/brennanfee)",
+  "homepage": "https://github.com/brennanfee/project-name#readme",
+  "bugs": "https://github.com/brennanfee/project-name/issues",
+  "main": "readme.md",
+  "scripts": {
+    "format": "npx prettier --write **/*.{html,css,js,jsx,ts,scss,less,json,md,yml,yaml}"
+  },
+  "keywords": [],
+  "dependencies": {},
+  "devDependencies": {
+    "@prettier/plugin-xml": "^0.7.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "prettier-plugin-package": "^0.3.1",
+    "prettier-plugin-toml": "^0.3.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "extends": [
+      "plugin:prettier/recommended"
+    ]
+  },
+  "prettier": {
+    "printWidth": 88,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "avoid",
+    "requirePragma": false,
+    "insertPragma": false,
+    "proseWrap": "always",
+    "htmlWhitespaceSensitivity": "css",
+    "vueIndentScriptAndStyle": true,
+    "endOfLine": "lf"
+  }
+}
