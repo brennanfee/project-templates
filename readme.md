@@ -37,6 +37,8 @@ description.
   copy it into the project folder named `license`.
 - node -> These are, naturally, node-specific files. Mostly config for common tools such
   as prettier.
+- python -> I use [Poetry](https://python-poetry.org/) on most of my Python projects
+  these days so this has files for a basic setup of that.
 
 ## License
 
